@@ -1,0 +1,24 @@
+
+import discord
+from discord.ext import commands
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+
+@client.event
+async def on_message_delete(message):
+    author = message.author
+    content = message.content
+    channel = message.channel
+    await channel.send(message.content)
+
+@client.event
+async def on_message_delete(message):
+    log_post = ":wastebasket: A message by {} ({}) in {} has been deleted:\nMessage Content:\n\n{}".format(str(message.author), message.author.id, message.channel.name, message.clean_content)
+    mod_log = message.guild.get_channel(768830371478896682)
+    await mod_log.send(log_post)
+
+client.run('NzY3NDU0Nzg0NDA2OTQ1ODQy.X4yJ9w.gcsJj1tzNDHmPbST8MfP2l-73Do')
